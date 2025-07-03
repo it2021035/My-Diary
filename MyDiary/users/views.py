@@ -26,8 +26,9 @@ def users_login(request):
                 return redirect(request.POST.get('next'))
             else:
                 return redirect("posts:list")
+        else:
+            messages.error(request, "Invalid username or password.")  
     else:
-        messages.error(request, "Invalid username or password.") 
         form = AuthenticationForm()
     return render(request, "users/login.html", { "form": form })
 
