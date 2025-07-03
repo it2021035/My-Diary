@@ -2,6 +2,7 @@ from django.shortcuts import render , redirect
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from . import forms
+from django.shortcuts import get_object_or_404
     # Create your views here.
 
 
@@ -25,3 +26,30 @@ def post_new(request):
     else:    
         form = forms.CreatePost()
     return render(request, 'posts/post_new.html', {'form': form})
+
+@login_required(login_url="/users/login")
+def edit_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if post.author != request.user:
+        return redirect('posts:page', slug=slug)
+    
+    if request.method == 'POST':
+        form = forms.CreatePost(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('posts:page', slug=post.slug)
+    else:
+        form = forms.CreatePost(instance=post)
+    return render(request, 'posts/post_new.html', {'form': form, 'edit_mode': True})
+
+@login_required(login_url="/users/login")
+def delete_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if post.author != request.user:
+        return redirect('posts:page', slug=slug)
+    
+    if request.method == 'POST':
+        post.delete()
+        return redirect('posts:list')
+    
+    return render(request, 'posts/confirm_delete.html', {'post': post})
