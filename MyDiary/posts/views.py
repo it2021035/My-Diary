@@ -3,6 +3,8 @@ from .models import Post
 from django.contrib.auth.decorators import login_required
 from . import forms
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
+
     # Create your views here.
 
 
@@ -21,6 +23,7 @@ def post_new(request):
         if form.is_valid():
             newpost = form.save(commit=False)
             newpost.author = request.user
+            messages.success(request, "Post created successfully.")
             newpost.save() 
             return redirect('posts:list')
     else:    
@@ -37,6 +40,7 @@ def edit_post(request, slug):
         form = forms.CreatePost(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
+            messages.success(request, "Post updated successfully.")
             return redirect('posts:page', slug=post.slug)
     else:
         form = forms.CreatePost(instance=post)
@@ -50,6 +54,7 @@ def delete_post(request, slug):
     
     if request.method == 'POST':
         post.delete()
+        messages.warning(request, "Post deleted.")
         return redirect('posts:list')
     
     return render(request, 'posts/confirm_delete.html', {'post': post})
