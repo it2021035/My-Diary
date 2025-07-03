@@ -29,6 +29,9 @@
                     {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'posts:new-post' %}">New Post</a></li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:dashboard' %}">My Posts</a>
+                        </li>                        
+                        <li class="nav-item">
                             <form action="{% url 'users:logout' %}" method="post" class="d-inline">
                                 {% csrf_token %}
                                 <button class="btn btn-outline-light btn-sm ms-2">Logout</button>

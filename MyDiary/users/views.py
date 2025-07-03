@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import logout,login
 from django.contrib import messages
-
+from posts.models import Post
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def users_register(request):
     if request.method =="POST":
@@ -38,3 +39,8 @@ def users_logout(request):
     else:
         form = AuthenticationForm()
     return render(request,'users/login.html',{"form":form})
+
+@login_required(login_url="/users/login")
+def users_dashboard(request):
+    posts = Post.objects.filter(author=request.user).order_by("-date")
+    return render(request, "users/dashboard.html", {"posts": posts})
