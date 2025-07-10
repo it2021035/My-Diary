@@ -8,7 +8,10 @@ from django.contrib.auth.decorators import login_required
 def users_register(request):
     if request.method =="POST":
         form = UserCreationForm(request.POST)
+        print("its maybe valid boy")
+
         if form.is_valid():
+            print("its valid boy")
             login(request,form.save())
             messages.success(request, "Registration successful! You are now logged in.")
             return redirect("posts:list")

@@ -1,10 +1,37 @@
 {% extends 'layout.html' %}
 
-{% block title %}
-    About
-{% endblock %}
+{% block title %}About{% endblock %}
 
 {% block content %}
-    <h1>About</h1>
-    <p>Check out my <a href="/">Diary</a> page.</p>
+<div class="mt-5">
+  <h1 class="mb-4 text-center">ℹ️ About This Project</h1>
+
+  <p class="lead text-center">
+    <strong>My Diary</strong> may look like a personal blogging platform — but it’s not what it seems.
+  </p>
+
+  <p>
+    This application was intentionally designed as part of an academic thesis project focused on <strong>Intrusion Detection Research</strong>. The goal is to study how malicious users interact with seemingly legitimate web applications and to collect real-world data for testing defensive cybersecurity mechanisms.
+  </p>
+
+  <p>
+    <strong>My Diary</strong> mimics the functionality of a typical blogging or journaling app. It includes user registration, login/logout, post creation, and content browsing. However, all of this is part of a controlled, sandboxed environment built to monitor suspicious behavior, analyze attack patterns, and improve intrusion detection systems.
+  </p>
+
+  <p>
+    The backend is instrumented to log user activity, generate alerts, and feed security analytics tools for further investigation. No actual sensitive or personal user data is stored or required. The entire setup is <em>non-production</em> and used exclusively in a closed, experimental network.
+  </p>
+
+  <p class="mt-4">
+    This project is part of a university thesis titled:
+    <br>
+    <strong>"Μελέτη τεχνικών για την ανίχνευση κακόβουλης εισβολής συστημάτων με χρήση εργαλείων ανοικτού λογισμικού"</strong>
+    <br>
+    (Study of intrusion detection in information systems using open-source tools)
+  </p>
+
+  <p class="mt-5 text-muted text-center">
+    © 2025 – This app is for research and educational purposes only.
+  </p>
+</div>
 {% endblock %}

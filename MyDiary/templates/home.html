@@ -1,10 +1,22 @@
 {% extends 'layout.html' %}
 
-{% block title %}
-    Home
-{% endblock %}
+{% block title %}Welcome{% endblock %}
 
 {% block content %}
-    <h1>My Diary</h1>
-    <p>Check out my <a href="/about">About</a> page.</p>
+<div class="text-center mt-5">
+  <h1 class="mb-4">📔 Welcome to My Diary</h1>
+  <p class="lead">
+    Your personal space to share thoughts, stories, and experiences.
+  </p>
+  <p>
+    Whether you're here to reflect, express yourself, or document your journey,
+    <strong>My Diary</strong> is the perfect place to start writing. You can create posts, manage your entries, and keep your thoughts safe and organized — all in one place.
+  </p>
+  <p class="mt-4">
+    <a href="{% url 'posts:list' %}" class="btn btn-primary btn-lg">Browse Posts</a>
+    {% if not user.is_authenticated %}
+      <a href="{% url 'users:register' %}" class="btn btn-outline-secondary btn-lg ms-2">Join Now</a>
+    {% endif %}
+  </p>
+</div>
 {% endblock %}

@@ -13,12 +13,12 @@
                     </h5>
                     <p class="card-text text-muted">Created: {{ post.date|date:"Y-m-d H:i" }}</p>
                     <div class="d-flex gap-2">
-                        <a href="{% url 'posts:edit' slug=post.slug %}" class="btn btn-sm btn-outline-secondary">✏️ Edit</a>
-                        <form action="{% url 'posts:delete' slug=post.slug %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-outline-danger">🗑️ Delete</button>
+                        <a href="{% url 'posts:edit' slug=post.slug %}" class="btn btn-sm btn-outline-primary">✏️ Edit</a>
+                        <form action="{% url 'posts:delete' slug=post.slug %}" method="post" class="d-inline">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-sm btn-outline-danger">🗑️ Delete</button>
                         </form>
-                    </div>
+                    </div>                      
                 </div>
             </div>
         {% empty %}
